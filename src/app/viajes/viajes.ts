@@ -135,7 +135,19 @@ export class ViajesComponent implements OnInit {
       return;
     }
 
-    this.apiService.createViaje(this.viajeForm.value).subscribe(() => {
+    const formValue = this.viajeForm.value;
+
+    const viaje = {
+      origen: formValue.origen,
+      destino: formValue.destino,
+      fecha: formValue.fecha,
+      hora: `${formValue.hora}:00`,
+      tipo_servicio: formValue.tipo_servicio,
+      precio: formValue.precio,
+      estado: 'Programado'
+    };
+
+    this.apiService.createViaje(viaje).subscribe(() => {
       this.cargarViajes();
       this.viajeForm.reset({ tipo_servicio: 'VIP', precio: 0 });
     });
