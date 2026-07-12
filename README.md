@@ -1,25 +1,35 @@
 # Cruz del Sur - Frontend
 
-Frontend del sistema **Cruz del Sur**, desarrollado con **Angular**.  
-Esta aplicación permite gestionar clientes, viajes, reservas y usuarios mediante una interfaz web conectada a un backend desarrollado con Spring Boot.
+Frontend del sistema **Cruz del Sur**, desarrollado con **Angular**.
 
 ## Descripción
 
-El frontend forma parte de un sistema de gestión para una empresa de transporte. Desde la aplicación se puede iniciar sesión, acceder al menú principal y administrar la información principal del sistema según el rol del usuario autenticado.
+Esta aplicación permite gestionar clientes, viajes, reservas y usuarios mediante una interfaz web conectada a un backend desarrollado con Spring Boot.
 
-La aplicación consume los servicios REST del backend y utiliza autenticación con token JWT para proteger las rutas internas.
+El sistema cuenta con inicio de sesión, rutas protegidas, validaciones en formularios y consumo de servicios REST.
 
 ## Tecnologías utilizadas
 
 - Angular 21
 - TypeScript
-- HTML
-- CSS
 - Angular Router
-- Angular Forms
+- Reactive Forms
 - HttpClient
-- JWT para autenticación
-- Backend Spring Boot conectado por API REST
+- JWT
+- CSS
+
+## Funcionalidades principales
+
+- Inicio de sesión con JWT.
+- Panel principal del sistema.
+- Gestión de clientes.
+- Gestión de viajes.
+- Gestión de reservas.
+- Gestión de usuarios.
+- Validaciones en formularios.
+- Rutas protegidas.
+- Control de acceso por rol.
+- Consumo de API REST del backend.
 
 ## Requisitos previos
 
@@ -30,135 +40,98 @@ La aplicación consume los servicios REST del backend y utiliza autenticación c
 
 ## Instalación
 
-```bash
-git clone https://github.com/marrrcelop/cruz-del-sur-frontend.git
-cd cruz-del-sur-frontend
+git clone https://github.com/marrrcelop/cruz-del-sur-frontend-main.git
+cd cruz-del-sur-frontend-main
 npm install
-Ejecución del proyecto
+
+## Ejecución local
+
 npm start
+
 Luego abrir:
+
 http://localhost:4200
-Conexión con el backend
-La URL base del backend está configurada en:
+
+## Configuración del backend
+
+La URL base del backend se encuentra en:
+
 src/app/core/api.ts
-Actualmente apunta a:
-http://localhost:8080
-Funcionalidades principales
-Inicio de sesión
-Permite ingresar al sistema mediante credenciales válidas.
-Al iniciar sesión correctamente, se guarda el token JWT y se habilita el acceso al menú principal.
-Menú principal
-Desde el menú principal se puede acceder a:
-Clientes
-Viajes
-Reservas
-Usuarios
-Gestión de clientes
-Permite registrar, listar y eliminar clientes.
-Validaciones principales:
-Nombre obligatorio
-Documento obligatorio
-Correo obligatorio y con formato válido
-Teléfono con formato válido
-Gestión de viajes
-Permite registrar, listar y eliminar viajes.
-Validaciones principales:
-Origen obligatorio
-Destino obligatorio
-Fecha obligatoria
-Precio obligatorio y mayor a cero
-El origen y destino no deben ser iguales
-Gestión de reservas
-Permite registrar, listar y eliminar reservas.
-Validaciones principales:
-Cliente obligatorio
-Viaje obligatorio
-Número de asiento obligatorio
-El asiento debe ser un número válido
-Gestión de usuarios
-Permite listar, registrar y eliminar usuarios del sistema.
-Esta sección está protegida por rol.
-Validaciones principales:
-Nombre obligatorio
-Correo obligatorio y válido
-Contraseña obligatoria
-Rol obligatorio
-Función por roles
-El sistema diferencia el acceso según el rol del usuario autenticado.
-La pestaña Usuarios es exclusiva para el rol:
-ADMIN
-Los usuarios que no tengan rol de administrador no pueden ingresar a la ruta de usuarios.
-Si intentan acceder manualmente a la URL, el sistema los redirige al menú principal.
-Rutas protegidas:
-/home
-/clientes
-/viajes
-/reservas
-/usuarios
-La ruta /usuarios requiere rol ADMIN.
-Seguridad en el frontend
+
+Para desarrollo local:
+
+export const API_URL = 'http://localhost:8080';
+
+Para producción o despliegue en la nube, reemplazar por la URL real del backend:
+
+export const API_URL = 'https://URL-DE-TU-BACKEND';
+
+## Rutas del sistema
+
+- `/login`: inicio de sesión.
+- `/home`: panel principal.
+- `/clientes`: módulo de clientes.
+- `/viajes`: módulo de viajes.
+- `/reservas`: módulo de reservas.
+- `/usuarios`: módulo de usuarios.
+
+## Seguridad en frontend
+
 El frontend implementa:
-Protección de rutas con authGuard
-Validación de sesión activa
-Control de acceso por roles
-Interceptor para enviar el token JWT en las peticiones HTTP
-Redirección automática al login si el usuario no está autenticado
-Restricción del módulo Usuarios solo para administradores
-Validaciones en tiempo real
-Los formularios muestran errores antes de enviar los datos al backend.
-Esto mejora la experiencia del usuario y evita enviar información incompleta o inválida.
-Las validaciones del frontend complementan las validaciones del backend, pero no las reemplazan.
-El backend sigue siendo el encargado principal de proteger la información y aplicar las reglas del sistema.
-Estructura principal del proyecto
-src/
-└── app/
-    ├── core/
-    │   ├── api.ts
-    │   ├── auth.ts
-    │   ├── auth-guard.ts
-    │   └── auth-interceptor.ts
-    ├── login/
-    ├── home/
-    ├── clientes/
-    ├── viajes/
-    ├── reservas/
-    ├── usuarios/
-    ├── app.routes.ts
-    └── app.config.ts
-Scripts disponibles
-Instalar dependencias:
-npm install
-Ejecutar en desarrollo:
-npm start
-Compilar el proyecto:
+
+- Protección de rutas con `authGuard`.
+- Envío automático del token JWT con `authInterceptor`.
+- Validación de sesión activa.
+- Redirección al login si el usuario no está autenticado.
+- Restricción del módulo usuarios según rol.
+
+## Build de producción
+
 npm run build
-Ejecutar pruebas:
-npm test
-Compilación
-Para generar una versión lista para producción:
-npm run build
+
 Los archivos compilados se generan en la carpeta:
+
 dist/
-Repositorio del backend
-https://github.com/marrrcelop/CruzDelSur-main
-Errores comunes
-Error de conexión con el backend
-Verificar que el backend esté encendido en:
-http://localhost:8080
-Error de CORS
-Verificar que el backend permita solicitudes desde:
-http://localhost:4200
-No se puede ingresar a Usuarios
-La pestaña Usuarios solo está disponible para usuarios con rol:
-ADMIN
-Si el usuario tiene otro rol, será redirigido al menú principal.
-Estado del proyecto
-El frontend cuenta con:
-Integración con backend Spring Boot
-Login con JWT
-Protección de rutas
-Control de acceso por roles
-Módulos de clientes, viajes, reservas y usuarios
-Validaciones en tiempo real
-Interfaz conectada a servicios REST
-Restricción del módulo Usuarios solo para administradores
+
+## Despliegue
+
+El frontend puede desplegarse en plataformas como:
+
+- Vercel
+- Netlify
+- Firebase Hosting
+
+Para desplegar:
+
+1. Subir el proyecto a GitHub.
+2. Conectar el repositorio con la plataforma elegida.
+3. Configurar el comando de instalación:
+
+npm install
+
+4. Configurar el comando de build:
+
+npm run build
+
+5. Configurar la carpeta de salida generada dentro de `dist/`.
+6. Cambiar `API_URL` por la URL pública del backend desplegado.
+
+## URL del sistema desplegado
+
+Frontend:
+
+https://URL-DE-TU-FRONTEND
+
+Backend:
+
+https://URL-DE-TU-BACKEND
+
+## Backend relacionado
+
+Repositorio del backend:
+
+https://github.com/marrrcelop/cruz-del-sur-backend.git
+
+## Estado del proyecto
+
+El frontend cuenta con integración con backend, autenticación JWT, rutas protegidas, validaciones y módulos principales para la gestión del sistema Cruz del Sur.
