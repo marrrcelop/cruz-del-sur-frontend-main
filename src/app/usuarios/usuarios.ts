@@ -36,7 +36,7 @@ import { Router } from '@angular/router';
             <label>Rol</label>
             <select formControlName="rol" class="form-control" [class.invalid]="isInvalid('rol')">
               <option value="ADMIN">ADMIN</option>
-              <option value="AGENTE">AGENTE</option>
+              <option value="USER">USER</option>
             </select>
             <div *ngIf="isInvalid('rol')" class="error">{{ getError('rol') }}</div>
           </div>
@@ -107,7 +107,7 @@ export class UsuariosComponent implements OnInit {
     nombres: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-zÀ-ÿ\s]+$/)]],
     correo: ['', [Validators.required, Validators.email]],
     contrasena_hash: ['', [Validators.required, Validators.minLength(6)]],
-    rol: ['ADMIN', [Validators.required, Validators.pattern(/^(ADMIN|AGENTE)$/)]]
+    rol: ['ADMIN', [Validators.required, Validators.pattern(/^(ADMIN|USER)$/)]]
   });
 
   ngOnInit() { this.cargarUsuarios(); }
