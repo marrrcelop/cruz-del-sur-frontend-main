@@ -58,13 +58,8 @@ La URL base del backend se encuentra en:
 
 src/app/core/api.ts
 
-Para desarrollo local:
-
-export const API_URL = 'http://localhost:8080';
-
-Para producción o despliegue en la nube, reemplazar por la URL real del backend:
-
-export const API_URL = 'https://URL-DE-TU-BACKEND';
+Para desarrollo en nube:
+export const API_URL = 'https://cruz-del-sur-backend-production.up.railway.app';
 
 ## Rutas del sistema
 
@@ -95,36 +90,28 @@ dist/
 
 ## Despliegue
 
-El frontend puede desplegarse en plataformas como:
+El frontend está desplegado en Netlify:
 
-- Vercel
-- Netlify
-- Firebase Hosting
+https://stately-chaja-5a3d6b.netlify.app
 
-Para desplegar:
+Backend conectado:
 
-1. Subir el proyecto a GitHub.
-2. Conectar el repositorio con la plataforma elegida.
-3. Configurar el comando de instalación:
+https://cruz-del-sur-backend-production.up.railway.app
 
-npm install
+La aplicación fue compilada con:
 
-4. Configurar el comando de build:
-
+```bash
 npm run build
-
-5. Configurar la carpeta de salida generada dentro de `dist/`.
-6. Cambiar `API_URL` por la URL pública del backend desplegado.
 
 ## URL del sistema desplegado
 
 Frontend:
 
-https://URL-DE-TU-FRONTEND
+https://stately-chaja-5a3d6b.netlify.app
 
 Backend:
 
-https://URL-DE-TU-BACKEND
+https://cruz-del-sur-backend-production.up.railway.app
 
 ## Backend relacionado
 
@@ -135,3 +122,24 @@ https://github.com/marrrcelop/cruz-del-sur-backend.git
 ## Estado del proyecto
 
 El frontend cuenta con integración con backend, autenticación JWT, rutas protegidas, validaciones y módulos principales para la gestión del sistema Cruz del Sur.
+```md
+## Manual de uso
+
+1. Ingresar al sistema desde:
+
+https://stately-chaja-5a3d6b.netlify.app
+
+2. Iniciar sesión con un usuario registrado.
+
+3. Desde el panel principal se puede acceder a:
+
+- Clientes: registrar, listar y eliminar clientes.
+- Viajes: registrar, listar y eliminar viajes.
+- Reservas: registrar, listar y eliminar reservas.
+- Usuarios: gestionar usuarios administrativos.
+
+4. Al iniciar sesión, el frontend guarda el token JWT.
+
+5. El token se envía automáticamente al backend mediante el interceptor HTTP.
+
+6. Si el usuario no está autenticado, las rutas protegidas redirigen al login.
