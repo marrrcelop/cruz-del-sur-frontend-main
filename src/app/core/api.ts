@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // URL base de tu backend Spring Boot
-export const API_URL = 'http://localhost:8080';
-
+export const API_URL = 'https://cruz-del-sur-backend-production.up.railway.app';
 // Endpoints definidos
 export const ENDPOINTS = {
   login: `${API_URL}/auth/login`,
